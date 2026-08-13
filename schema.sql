@@ -1,0 +1,13 @@
+CREATE TABLE workers (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  name TEXT NOT NULL,
+  role TEXT
+);
+
+CREATE TABLE tasks (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  title TEXT NOT NULL,
+  status TEXT NOT NULL DEFAULT 'pending',
+  worker_id INTEGER,
+  FOREIGN KEY (worker_id) REFERENCES workers(id)
+);
