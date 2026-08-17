@@ -6,10 +6,25 @@ async function loadTasks() {
      list.innerHTML = '';
 
      tasks.forEach(task => {
-       const li = document.createElement('li');
-       li.textContent = `${task.title} — ${task.status} (${task.assigned_to ?? 'unassigned'})`;
-       list.appendChild(li);
-     });
+     const li = document.createElement('li');
+     li.textContent = `${task.title} — ${task.status} (${task.assigned_to ?? 'unassigned'}) `;
+
+     if (task.status !== 'done') {
+       const btn = document.createElement('button');
+       btn.textContent = 'Mark done';
+       btn.addEventListener('click', async () => {
+         await fetch(`/tasks/${task.id}`, {
+           method: 'PATCH',
+           headers: { 'Content-Type': 'application/json' },
+           body: JSON.stringify({ status: 'done' })
+         });
+         loadTasks();
+       });
+       li.appendChild(btn);
+     }
+
+     list.appendChild(li);
+   });
    }
 
    loadTasks();
