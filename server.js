@@ -2,6 +2,8 @@ const express = require('express');
    const Database = require('better-sqlite3');
 
    const app = express();
+   app.use(express.json());
+   app.use(express.static('public'));
    const PORT = 3000;
    const db = new Database('warehouse.db');
 
@@ -13,9 +15,40 @@ const express = require('express');
      const tasks = db.prepare(`
        SELECT tasks.id, tasks.title, tasks.status, workers.name AS assigned_to
        FROM tasks
-       JOIN workers ON tasks.worker_id = workers.id
+       LEFT JOIN workers ON tasks.worker_id = workers.id
      `).all();
      res.json(tasks);
+   });
+
+   app.post('/tasks', (req, res) => {
+     const { title, worker_id } = req.body;
+
+     if (!title) {
+       return res.status(400).json({ error: 'title is required' });
+     }
+
+     const result = db.prepare(`
+       INSERT INTO tasks (title, worker_id) VALUES (?, ?)
+     `).run(title, worker_id ?? null);
+
+     res.status(201).json({ id: result.lastInsertRowid, title, status: 'pending', worker_id });
+   });
+
+   app.patch('/tasks/:id', (req, res) => {
+     const { status } = req.body;
+     const { id } = req.params;
+
+     if (!status) {
+       return res.status(400).json({ error: 'status is required' });
+     }
+
+     const result = db.prepare(`UPDATE tasks SET status = ? WHERE id = ?`).run(status, id);
+
+     if (result.changes === 0) {
+       return res.status(404).json({ error: 'task not found' });
+     }
+
+     res.json({ id, status });
    });
 
    app.listen(PORT, () => {
