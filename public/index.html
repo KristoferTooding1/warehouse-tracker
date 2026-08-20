@@ -1,17 +1,76 @@
 <!DOCTYPE html>
-   <html>
-   <head>
-     <title>Warehouse Tracker</title>
-   </head>
-   <body>
-     <h1>Tasks</h1>
-     <ul id="task-list"></ul>
-     <h2>Add Task</h2>
-   <form id="task-form">
-     <input type="text" id="title" placeholder="Task title" required>
-     <button type="submit">Add</button>
-   </form>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Manager</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-     <script src="app.js"></script>
-   </body>
-   </html>
+    <div class="container">
+        <h2>Tasks <span class="task-count">7 completed</span></h2>
+        
+        <ul class="task-list">
+            <li class="task-item">
+                <div class="task-left">
+                    <div class="status-checkbox"></div>
+                    <span class="task-title">Restock shelf A3</span>
+                </div>
+                <span class="assignee-badge kris">Kris</span>
+            </li>
+            <li class="task-item">
+                <div class="task-left">
+                    <div class="status-checkbox"></div>
+                    <span class="task-title">Check inventory count</span>
+                </div>
+                <span class="assignee-badge georg">Georg</span>
+            </li>
+            <li class="task-item">
+                <div class="task-left">
+                    <div class="status-checkbox"></div>
+                    <span class="task-title">Unload delivery truck</span>
+                </div>
+                <span class="assignee-badge kris">Kris</span>
+            </li>
+            <li class="task-item">
+                <div class="task-left">
+                    <div class="status-checkbox"></div>
+                    <span class="task-title">Sweep loading dock</span>
+                </div>
+                <span class="assignee-badge georg">Georg</span>
+            </li>
+            <li class="task-item">
+                <div class="task-left">
+                    <div class="status-checkbox"></div>
+                    <span class="task-title">Clean machines</span>
+                </div>
+                <span class="assignee-badge unassigned">Unassigned</span>
+            </li>
+            <li class="task-item">
+                <div class="task-left">
+                    <div class="status-checkbox"></div>
+                    <span class="task-title">asd</span>
+                </div>
+                <span class="assignee-badge unassigned">Unassigned</span>
+            </li>
+            <li class="task-item">
+                <div class="task-left">
+                    <div class="status-checkbox"></div>
+                    <span class="task-title">test</span>
+                </div>
+                <span class="assignee-badge unassigned">Unassigned</span>
+            </li>
+        </ul>
+
+        <div class="add-task-section">
+            <h3>Add Task</h3>
+            <div class="input-group">
+                <input type="text" placeholder="Task title...">
+                <button type="button">Add</button>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
