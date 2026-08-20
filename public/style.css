@@ -84,12 +84,16 @@ h2 {
     height: 20px;
     border: 2px solid var(--success-text);
     border-radius: 50%;
-    background-color: var(--success-bg);
+    background-color: transparent;
     position: relative;
     cursor: pointer;
 }
 
-.status-checkbox::after {
+.status-checkbox.checked {
+    background-color: var(--success-bg);
+}
+
+.status-checkbox.checked::after {
     content: '✓';
     position: absolute;
     top: 50%;
@@ -102,8 +106,11 @@ h2 {
 
 .task-title {
     font-weight: 500;
-    text-decoration: line-through;
     color: var(--text-secondary);
+}
+
+.task-title.done {
+    text-decoration: line-through;
 }
 
 .assignee-badge {
