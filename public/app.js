@@ -52,19 +52,38 @@ async function loadTasks() {
 
 loadTasks();
 
+async function loadWorkers() {
+  const res = await fetch('/workers');
+  const workers = await res.json();
+
+  const select = document.getElementById('worker-select');
+  workers.forEach(worker => {
+    const option = document.createElement('option');
+    option.value = worker.id;
+    option.textContent = worker.name;
+    select.appendChild(option);
+  });
+}
+
+loadWorkers();
+
 document.getElementById('task-form').addEventListener('submit', async (e) => {
   e.preventDefault();
 
   const titleInput = document.getElementById('title');
+  const workerSelect = document.getElementById('worker-select');
   const title = titleInput.value.trim();
+  const worker_id = workerSelect.value || null;
+
   if (!title) return;
 
   await fetch('/tasks', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ title })
+    body: JSON.stringify({ title, worker_id })
   });
 
   titleInput.value = '';
+  workerSelect.value = '';
   loadTasks();
 });

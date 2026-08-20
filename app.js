@@ -35,6 +35,11 @@ app.get('/tasks', (req, res) => {
   res.json(tasks);
 });
 
+app.get('/workers', (req, res) => {
+  const workers = db.prepare('SELECT id, name FROM workers').all();
+  res.json(workers);
+});
+
 app.post('/tasks', (req, res) => {
   const { title, worker_id } = req.body;
 

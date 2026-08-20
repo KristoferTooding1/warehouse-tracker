@@ -1,26 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Task Manager</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<div class="container">
-    <h2>Tasks</h2>
-    <ul class="task-list" id="task-list"></ul>
+    <div class="container">
+        <h2>Tasks</h2>
+        <ul class="task-list" id="task-list"></ul>
 
-    <div class="add-task-section">
-        <h3>Add Task</h3>
-        <form id="task-form" class="input-group">
-            <input type="text" id="title" placeholder="Task title...">
-            <button type="submit">Add</button>
-        </form>
+        <div class="add-task-section">
+            <h3>Add Task</h3>
+            <form id="task-form" class="input-group">
+                <input type="text" id="title" placeholder="Task title...">
+                <select id="worker-select">
+                    <option value="">Unassigned</option>
+                </select>
+                <button type="submit">Add</button>
+            </form>
+        </div>
     </div>
-</div>
 
-<script src="app.js"></script>
+    <script src="app.js"></script>
 </body>
+
 </html>
